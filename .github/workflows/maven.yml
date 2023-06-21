@@ -2,12 +2,12 @@ name: "java_app_pipeline"
 
 on:
   push:
-     branches: [ main ]
+     branches: [ Develop ]
    # branches: [ main, develop, "feature/*", "hotfix/*", "release/*" ] a
     
   pull_request:
    
-    branches: [ develop ]
+    branches: [ Develop ]
 
 jobs:
   

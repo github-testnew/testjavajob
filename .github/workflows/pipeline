@@ -1,0 +1,31 @@
+name: "java_app_pipeline"
+
+on:
+  push:
+    branches: [feature]
+    # branches: [ main, develop, "feature/*", "hotfix/*", "release/*" ]
+
+jobs:
+  Codebuild:
+    name: Codebuild
+    uses: "./.github/workflows/Build_Stage.yml"
+    with:
+      runnerName: "ubuntu-latest"
+      java-version: "11"
+      distribution: "temurin"
+      cache: "maven"
+
+  CodeScanning:
+    name: Test - SonarCloud Scan
+    uses: "./.github/workflows/Code_Quality_Stage.yml"
+    needs: [Codebuild]
+    java-version: "11.0.4"
+    runnerName: "ubuntu-latest"
+
+  buildImageandDeploy:
+    name: building docker image
+
+    needs: [Codebuild, CodeScanning]
+    uses: "./.github/workflows/deploystage.yml"
+    with:
+      runnerName: "ubuntu-latest"

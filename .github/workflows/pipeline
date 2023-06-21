@@ -28,4 +28,4 @@ jobs:
     needs: [Codebuild, CodeScanning]
     uses: "./.github/workflows/deploystage.yml"
     with:
-      runnerName: "ubuntu-latest" 
+      runnerName: "ubuntu-latest"

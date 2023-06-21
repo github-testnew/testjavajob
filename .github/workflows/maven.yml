@@ -3,7 +3,7 @@ name: "java_app_pipeline"
 on:
   push:
      branches: [ main ]
-   # branches: [ main, develop, "feature/*", "hotfix/*", "release/*" ]
+   # branches: [ main, develop, "feature/*", "hotfix/*", "release/*" ] a
     
   pull_request:
    

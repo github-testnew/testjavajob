@@ -18,5 +18,5 @@ jobs:
           # Install Trivy (if not already installed)
           curl -sfL https://install.trivy.io | sh -s -- -b /usr/local/bin
 
-          # Scan container image new image
+          # Scan container image new image add new image
           trivy image <your-image-name>

@@ -3,7 +3,7 @@ name: Trivy Scan
 on:
   push:
     branches:
-      - main
+      - develop
 
 jobs:
   trivy:
@@ -18,5 +18,5 @@ jobs:
           # Install Trivy (if not already installed)
           curl -sfL https://install.trivy.io | sh -s -- -b /usr/local/bin
 
-          # Scan container image
+          # Scan container image new image
           trivy image <your-image-name>

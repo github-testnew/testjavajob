@@ -14,7 +14,7 @@ jobs:
     runs-on: ${{ inputs.runnerName }}
 
     steps:
-      # Checks out the repository this file is in
+      # Checks out the repository this file is in ..
       - uses: actions/checkout@v3
       - name: Install Azure CLI
         run: |

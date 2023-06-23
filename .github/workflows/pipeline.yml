@@ -12,7 +12,7 @@ jobs:
     name: Codebuild
     uses: "./.github/workflows/Build_Stage.yml"
     with:
-       runnerName: "shara-org-runner"
+       runnerName: "github-testnew-runner"
        java-version: "11"
        distribution: "temurin"
        cache: "maven" 
@@ -36,39 +36,3 @@ jobs:
 
         - name: Publish Docker image
           run: docker push $REPO
-        - name: Install Trivy
-          run: |
-           curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
-        - name: Run Trivy vulnerability scanner
-          uses: aquasecurity/trivy-action@master
-          with:
-           image-ref: 'hub.docker.com/repository/docker/${{ env.REPO }}:${{ github.sha }}'
-           format: 'table'
-           exit-code: '1'
-           ignore-unfixed: true
-           vuln-type: 'os,library'
-           severity: 'CRITICAL,HIGH'
-        - name: Run Trivy scan
-          run: trivy image --clear-cache --format json -o scan_report.json ${{ env.REPO }}:${{ github.sha }}
-       
-        - name: Display Trivy scan results
-          run: cat scan_report.json
-  BuildImageandTrivyScanner:
-      name: Trivyscanner
-      uses: "./.github/workflows/trivy.yml"
-      needs: [ Codebuild ]     
- # CodeScanning:
-  #    name: Test - SonarCloud Scan
- #     uses: "./.github/workflows/Code_Quality_Stage.yml"
- #     needs: [ Codebuild ]
-  ##        java-version : "11.0.4"
-  # #      runnerName: "ubuntu-latest"
-          
-  #buildImageandDeploy:
-  #    name: building docker image
-      
-  #    needs: [ Codebuild , CodeScanning]
-  #    uses: "./.github/workflows/deploystage.yml"
-  #    with:
-  #      runnerName: "ubuntu-latest"
-      

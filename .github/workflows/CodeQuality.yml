@@ -38,7 +38,7 @@ jobs:
      runs-on: ${{inputs.runnerName}}
      needs: [sonar]
      env:
-      CODE_SMELLS_THRESHOLD: "83"
+      CODE_SMELLS_THRESHOLD: "70"
       VULNERABILITIES_THRESHOLD: "2"
       BUGS_THRESHOLD: "0"
      steps:

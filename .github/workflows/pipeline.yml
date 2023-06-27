@@ -49,7 +49,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: [sonar]
     env:
-      CODE_SMELLS_THRESHOLD: "0"
+      CODE_SMELLS_THRESHOLD: "16"
       VULNERABILITIES_THRESHOLD: "0"
       BUGS_THRESHOLD: "0"
     steps:

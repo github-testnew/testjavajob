@@ -10,7 +10,7 @@ jobs:
 
   docker:
     name: Publish - Docker Hub
-    runs-on: ${{ inputs.runnerName }}
+    runs-on: ubuntu-latest
     env:
        REPO: ${{ secrets.DOCKER_REPO }}
     steps:

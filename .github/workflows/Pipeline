@@ -1,0 +1,63 @@
+
+name: "java_app_pipeline"
+
+on:
+  push:
+   #branches: [ main, develop, feature, hotfix, release ]
+
+jobs:
+  Codebuild:
+    name: Codebuild
+    uses: "./.github/workflows/maven-publish.yml.yml"
+    with:
+       runnerName: "ubuntu-latest"
+       java-version: "11"
+       distribution: "temurin"
+       cache: "maven" 
+    
+  CodeScanning:
+     name: Test - SonarCloud Scan
+     uses: "./.github/workflows/CodeQuality.yml"
+     needs: [ Codebuild ]
+     secrets:
+     
+      GITTOKEN: "${{ secrets.GITTOKEN }}"
+      SONAR_TOKEN: "${{ secrets.SONAR_TOKEN }}"
+     
+     with:
+       java-version : "11.0.4"
+       runnerName: "ubuntu-latest"
+
+  Deploy
+     name: Deploy
+     uses: "./.github/workflows/docker-image.yml"
+     needs: [ Docker ]
+     secrets:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASS: ${{ secrets.DOCKER_PASSWORD }}
+        DOCKER_REPO: ${{ secrets.DOCKER_REPO }}
+      with:
+       runnerName: "ubuntu-latest"
+
+
+  TrivyScanner:
+      name: Trivyscanner
+      uses: "./.github/workflows/trivy.yml"
+      needs: [ Codebuild,CodeScanning ] 
+      secrets:
+        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+        DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
+        DOCKER_REPO: ${{ secrets.DOCKER_REPO }}
+      with:
+       runnerName: "ubuntu-latest"
+       
+  Terraform:
+      name: Terraform 
+      uses: "./.github/workflows/terraform.yml"
+      #needs: [ Codebuild,CodeScanning ]
+      secrets:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      with:
+       runnerName: "ubuntu-latest"
+      
+      

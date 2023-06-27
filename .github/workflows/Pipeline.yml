@@ -34,7 +34,7 @@ jobs:
   Deploy:
      name: Deploy
      uses: "./.github/workflows/docker-image.yml"
-     needs: [ Docker push ]
+    
      secrets:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASS: ${{ secrets.DOCKER_PASSWORD }}

@@ -8,7 +8,7 @@ on:
 jobs:
   Codebuild:
     name: Codebuild
-    uses: "./.github/workflows/maven-publish.yml.yml"
+    uses: "./.github/workflows/maven-publish.yml"
     with:
        runnerName: "ubuntu-latest"
        java-version: "11"

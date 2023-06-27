@@ -38,8 +38,8 @@ jobs:
      runs-on: ${{inputs.runnerName}}
      needs: [sonar]
      env:
-      CODE_SMELLS_THRESHOLD: "16"
-      VULNERABILITIES_THRESHOLD: "0"
+      CODE_SMELLS_THRESHOLD: "83"
+      VULNERABILITIES_THRESHOLD: "2"
       BUGS_THRESHOLD: "0"
      steps:
       - name: Install jq

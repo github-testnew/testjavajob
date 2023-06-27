@@ -65,7 +65,7 @@
             <version>3.0.0-M1</version>
             <configuration>
                 <repositoryId>github</repositoryId>
-                <url>https://maven.pkg.github.com/pshara6644/demo-repository</url>
+                <url>https://maven.pkg.github.com/kedar-gopale/testjavajob</url>
             </configuration>
         </plugin>
     
@@ -79,8 +79,8 @@
 				<sonar.branch.name>feature</sonar.branch.name>
 				<sonar.inclusions>src/main/java/**,src/main/resources/**</sonar.inclusions>
 				<sonar.exclusions>${code.coverage.exclusions}</sonar.exclusions>
-				<sonar.projectKey>demo-organisation_demo-project</sonar.projectKey>
-				<sonar.organization>demo-organisation</sonar.organization>
+				<sonar.projectKey>github-testnew_testjavajob</sonar.projectKey>
+				<sonar.organization>github-testnew</sonar.organization>
 				<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 			</properties>
 			<activation>
@@ -109,7 +109,7 @@
 		<repository>
 			<id>github</id>
 			<name>simplejavacode</name>
-			<url>https://maven.pkg.github.com/pshara6644/demo-repository</url>
+			<url>https://maven.pkg.github.com/kedar-gopale/testjavajob</url>
 		</repository>
 	</distributionManagement>
 </project>

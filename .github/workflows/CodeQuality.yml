@@ -1,13 +1,7 @@
 name: "java_app_pipeline"
 
 on:
-  push:
-     branches: [ feature ]
-   # branches: [ main, develop, "feature/*", "hotfix/*", "release/*" ] a
-    
-  pull_request:
-   
-    branches: [ feature ]
+  workflow_call:
 
 jobs:
   

@@ -3,6 +3,9 @@ name: "java_app_pipeline"
 
 on:
   push:
+    branches: [ "feature" ]
+  pull_request:
+    branches: [ "feature" ]
    #branches: [ main, develop, feature, hotfix, release ]
 
 jobs:
@@ -28,36 +31,18 @@ jobs:
        java-version : "11.0.4"
        runnerName: "ubuntu-latest"
 
-  Deploy
+  Deploy:
      name: Deploy
      uses: "./.github/workflows/docker-image.yml"
-     needs: [ Docker ]
+     needs: [ Docker push ]
      secrets:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
         DOCKER_PASS: ${{ secrets.DOCKER_PASSWORD }}
         DOCKER_REPO: ${{ secrets.DOCKER_REPO }}
-      with:
+     with:
        runnerName: "ubuntu-latest"
 
 
-  TrivyScanner:
-      name: Trivyscanner
-      uses: "./.github/workflows/trivy.yml"
-      needs: [ Codebuild,CodeScanning ] 
-      secrets:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
-        DOCKER_REPO: ${{ secrets.DOCKER_REPO }}
-      with:
-       runnerName: "ubuntu-latest"
-       
-  Terraform:
-      name: Terraform 
-      uses: "./.github/workflows/terraform.yml"
-      #needs: [ Codebuild,CodeScanning ]
-      secrets:
-        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
-      with:
-       runnerName: "ubuntu-latest"
+
       
       

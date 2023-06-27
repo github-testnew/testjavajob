@@ -2,8 +2,8 @@
 name: "java_app_pipeline"
 
 on:
-  workflow_call:
-   #branches: [ main, develop, feature, hotfix, release ]
+  push:
+   branches: [ main, develop, feature, hotfix, release ]
 
 jobs:
   Codebuild:

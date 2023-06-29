@@ -44,4 +44,3 @@ jobs:
            severity: 'CRITICAL,HIGH'
         - name: Display Scan Results
           run: cat trivy-image-results.sarif
-

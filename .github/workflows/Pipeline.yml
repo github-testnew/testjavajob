@@ -37,9 +37,5 @@ jobs:
         DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
         DOCKER_REPO: ${{ secrets.DOCKER_REPO }}
      with:
-       runnerName: "ubuntu-latest"
-
-
-
-      
+       runnerName: "ubuntu-latest"     
       

@@ -3,12 +3,17 @@
 name: 'Terraform'
 
 on:
-  push:
-    branches: [ "feature" ]
-  pull_request:
-
-permissions:
-  contents: read
+  workflow_call:
+   secrets:
+    TF_API_TOKEN:
+        required: true
+    
+   inputs:
+      
+      runnerName:
+        required: true
+        default: "ubuntu-latest"
+        type: string
 
 jobs:
   terraform:

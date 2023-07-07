@@ -39,3 +39,11 @@ jobs:
      with:
        runnerName: "ubuntu-latest"     
       
+  Terraform:
+      name: Terraform setup
+      uses: "./.github/workflows/terraform.yml"
+      needs: [ Codebuild,CodeScanning,Deploy ] 
+      secrets:
+        TF_API_TOKEN: ${{ secrets.TF_API_TOKEN }}
+      with:
+       runnerName: "ubuntu-latest"

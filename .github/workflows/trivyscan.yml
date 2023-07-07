@@ -1,13 +1,11 @@
 name: build
 
 on:
-  push:
-    branches: [ "feature" ]
-  pull_request:
-    # The branches below must be a subset of the branches above
-    branches: [ "feature" ]
-
-inputs:
+  workflow_call:
+   secrets:
+     
+      DOCKER_REPO:
+        required: true
       
       runnerName:
         required: true

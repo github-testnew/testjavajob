@@ -7,6 +7,14 @@ on:
     # The branches below must be a subset of the branches above
     branches: [ "feature" ]
 
+inputs:
+      
+      runnerName:
+        required: true
+        default: "ubuntu-latest"
+        type: string
+        
+
 permissions:
   contents: read
 

@@ -9,9 +9,6 @@ jobs:
   setup:
     runs-on: ubuntu-latest
 
-    env:
-      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -28,10 +25,6 @@ jobs:
         sudo apt update
         sudo apt install gh
         gh --version
-
-    - name: Set up GitHub Token for gh
-      run: |
-        echo "${GH_TOKEN}" | gh auth login --with-token -
 
     - name: Install GitHub Actions Importer CLI extension
       run: gh extension install github/gh-actions-importer

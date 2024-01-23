@@ -30,7 +30,11 @@ jobs:
         gh --version
 
     - name: Set up GitHub Token for gh
-      run: echo "machine github.com login $GH_TOKEN" >> ~/.netrc
+      run: |
+        gh auth login --with-token <<<"${GH_TOKEN}"
+        mkdir -p ~/.gh
+        echo "github.com:" > ~/.gh/config.yml
+        echo "  token: $GH_TOKEN" >> ~/.gh/config.yml
 
     - name: Install GitHub Actions Importer CLI extension
       run: gh extension install github/gh-actions-importer
@@ -40,8 +44,6 @@ jobs:
 
     - name: GitHub Authentication and Additional Commands
       run: |
-        gh auth login --with-token <<<"${GH_TOKEN}"
-
         # Additional commands after authentication
         echo "Running additional commands..."
         gh repo view

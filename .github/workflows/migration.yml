@@ -9,6 +9,9 @@ jobs:
   setup:
     runs-on: ubuntu-latest
 
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
@@ -26,6 +29,9 @@ jobs:
         sudo apt install gh
         gh --version
 
+    - name: Set up GitHub Token for gh
+      run: echo "machine github.com login $GH_TOKEN" >> ~/.netrc
+
     - name: Install GitHub Actions Importer CLI extension
       run: gh extension install github/gh-actions-importer
 
@@ -34,7 +40,7 @@ jobs:
 
     - name: GitHub Authentication and Additional Commands
       run: |
-        gh auth login
+        gh auth login --with-token <<<"${GH_TOKEN}"
 
         # Additional commands after authentication
         echo "Running additional commands..."

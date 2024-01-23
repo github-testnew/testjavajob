@@ -3,7 +3,7 @@ name: Setup Environment
 on:
   push:
     branches:
-      - main
+      - Develop
 
 jobs:
   setup:

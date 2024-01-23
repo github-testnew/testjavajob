@@ -1,29 +1,44 @@
-name: Bamboo Migration
+name: Setup Environment
 
 on:
   push:
     branches:
-      - Develop
+      - main
 
 jobs:
-  migration:
+  setup:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install Docker
-        run: |
-          sudo apt update
-          curl -fsSL https://get.docker.com -o get-docker.sh
-          sh get-docker.sh
-          docker --version
+    - name: Checkout repository
+      uses: actions/checkout@v2
 
-      - name: Install GitHub CLI
-        run: |
-          sudo apt update
-          sudo apt install gh
-          gh --version
+    - name: Install Docker
+      run: |
+        sudo apt update
+        curl -fsSL https://get.docker.com -o get-docker.sh
+        sh get-docker.sh
+        docker --version
 
-      - name: Git Authentication
-        run: gh auth login --with-token ${{ secrets.GH_TOKEN_NEW }
+    - name: Install GitHub CLI
+      run: |
+        sudo apt update
+        sudo apt install gh
+        gh --version
 
-        
+    - name: Install GitHub Actions Importer CLI extension
+      run: gh extension install github/gh-actions-importer
+
+    - name: Verify Actions Importer extension installation
+      run: gh actions-importer -h
+
+    - name: GitHub Authentication and Additional Commands
+      run: |
+        gh auth login
+
+        # Additional commands after authentication
+        echo "Running additional commands..."
+        gh repo view
+        gh issue list
+
+        # You can add more commands here

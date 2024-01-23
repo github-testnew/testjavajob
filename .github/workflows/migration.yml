@@ -1,0 +1,29 @@
+name: Bamboo Migration
+
+on:
+  push:
+    branches:
+      - Develop
+
+jobs:
+  migration:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install Docker
+        run: |
+          sudo apt update
+          curl -fsSL https://get.docker.com -o get-docker.sh
+          sh get-docker.sh
+          docker --version
+
+      - name: Install GitHub CLI
+        run: |
+          sudo apt update
+          sudo apt install gh
+          gh --version
+
+      - name: Git Authentication
+        run: gh auth login --with-token ${{ secrets.GH_TOKEN_NEW }
+
+        
